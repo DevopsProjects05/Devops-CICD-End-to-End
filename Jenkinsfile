@@ -4,7 +4,7 @@ pipeline {
     environment {
         GIT_REPO = "https://github.com/DevopsProjects05/Devops-CICD-End-to-End.git" // Your GitHub repository
         GIT_BRANCH = "main"                                                      // Replace with the branch name
-        TERRAFORM_DIR = "./terraform"                                            // Path to Terraform configuration
+        TERRAFORM_DIR = "./Terraform"                                            // Path to Terraform configuration
         INVENTORY_FILE = "./inventory.ini"                                       // Path to dynamically generated Ansible inventory
         PRIVATE_KEY = "C:/Users/USER/OneDrive/Desktop/Keys/DevOps-Practice.pem"  // Path to private key
         AWS_REGION = "ap-south-1"                                                // AWS region
