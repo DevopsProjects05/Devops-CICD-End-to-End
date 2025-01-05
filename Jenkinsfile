@@ -1,0 +1,106 @@
+pipeline {
+    agent any
+
+    environment {
+        GIT_REPO = "https://github.com/DevopsProjects05/Devops-CICD-End-to-End.git" // Your Git repository URL
+        GIT_BRANCH = "main"                                                      // Replace with your branch name
+        TERRAFORM_DIR = "./Terraform"                                            // Path to Terraform configuration
+        INVENTORY_FILE = "./inventory.ini"                                       // Path to generated Ansible inventory
+        PRIVATE_KEY = "C:/Users/USER/OneDrive/Desktop/Keys/DevOps-Practice.pem"  // Path to private key
+        AWS_REGION = "ap-south-1"                                                // AWS region
+    }
+
+    stages {
+        stage('Clone Git Repository') {
+            steps {
+                script {
+                    echo "Cloning Git repository..."
+                    git branch: "${GIT_BRANCH}", url: "${GIT_REPO}"
+                }
+            }
+        }
+
+        stage('Setup AWS Credentials') {
+            steps {
+                script {
+                    echo "Fetching AWS Credentials..."
+                    withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials-id']]) {
+                        env.AWS_ACCESS_KEY_ID = "${AWS_ACCESS_KEY_ID}"
+                        env.AWS_SECRET_ACCESS_KEY = "${AWS_SECRET_ACCESS_KEY}"
+                    }
+                }
+            }
+        }
+
+        stage('Terraform Init and Apply') {
+            steps {
+                script {
+                    echo "Initializing and Applying Terraform..."
+                    sh '''
+                    export AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+                    export AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+                    cd $TERRAFORM_DIR
+                    terraform init
+                    terraform apply -auto-approve
+                    '''
+                }
+            }
+        }
+
+        stage('Fetch EC2 Instance Public IP') {
+            steps {
+                script {
+                    echo "Fetching EC2 Instance Public IP..."
+                    def publicIp = sh(script: "cd $TERRAFORM_DIR && terraform output -raw public_ip", returnStdout: true).trim()
+                    echo "Public IP: ${publicIp}"
+
+                    echo "Generating Ansible Inventory..."
+                    writeFile file: "$INVENTORY_FILE", text: """
+                    [web]
+                    ${publicIp} ansible_ssh_user=ec2-user ansible_ssh_private_key_file=${PRIVATE_KEY} ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+                    """
+                }
+            }
+        }
+
+        stage('Test Ansible Connectivity') {
+            steps {
+                script {
+                    echo "Testing Ansible Connectivity..."
+                    sh '''
+                    ansible -i $INVENTORY_FILE web -m ping
+                    '''
+                }
+            }
+        }
+
+        stage('Run Ansible Playbook') {
+            steps {
+                script {
+                    echo "Running Ansible Playbook..."
+                    sh '''
+                    ansible-playbook -i $INVENTORY_FILE ./playbook.yml
+                    '''
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            script {
+                echo "Cleaning up resources or sending notifications..."
+            }
+        }
+        success {
+            script {
+                echo "Pipeline executed successfully!"
+            }
+        }
+        failure {
+            script {
+                echo "Pipeline failed. Please check the logs."
+            }
+        }
+    }
+}
