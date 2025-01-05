@@ -2,10 +2,10 @@ pipeline {
     agent any
 
     environment {
-        GIT_REPO = "https://github.com/DevopsProjects05/Devops-CICD-End-to-End.git" // Your Git repository URL
-        GIT_BRANCH = "main"                                                      // Replace with your branch name
-        TERRAFORM_DIR = "./Terraform"                                            // Path to Terraform configuration
-        INVENTORY_FILE = "./inventory.ini"                                       // Path to generated Ansible inventory
+        GIT_REPO = "https://github.com/DevopsProjects05/Devops-CICD-End-to-End.git" // Your GitHub repository
+        GIT_BRANCH = "main"                                                      // Replace with the branch name
+        TERRAFORM_DIR = "./terraform"                                            // Path to Terraform configuration
+        INVENTORY_FILE = "./inventory.ini"                                       // Path to dynamically generated Ansible inventory
         PRIVATE_KEY = "C:/Users/USER/OneDrive/Desktop/Keys/DevOps-Practice.pem"  // Path to private key
         AWS_REGION = "ap-south-1"                                                // AWS region
     }
@@ -20,29 +20,17 @@ pipeline {
             }
         }
 
-        stage('Setup AWS Credentials') {
-            steps {
-                script {
-                    echo "Fetching AWS Credentials..."
-                    withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials-id']]) {
-                        env.AWS_ACCESS_KEY_ID = "${AWS_ACCESS_KEY_ID}"
-                        env.AWS_SECRET_ACCESS_KEY = "${AWS_SECRET_ACCESS_KEY}"
-                    }
-                }
-            }
-        }
-
         stage('Terraform Init and Apply') {
             steps {
-                script {
-                    echo "Initializing and Applying Terraform..."
-                    sh '''
-                    export AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
-                    export AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
-                    cd $TERRAFORM_DIR
-                    terraform init
-                    terraform apply -auto-approve
-                    '''
+                withAWS(credentials: 'aws-credentials-id', region: "${AWS_REGION}") { // Use AWS credentials
+                    script {
+                        echo "Initializing and Applying Terraform..."
+                        sh '''
+                        cd $TERRAFORM_DIR
+                        terraform init
+                        terraform apply -auto-approve
+                        '''
+                    }
                 }
             }
         }
