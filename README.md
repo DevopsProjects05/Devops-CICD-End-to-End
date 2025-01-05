@@ -41,7 +41,7 @@ An EC2 instance serves as the server where you will install and configure tools 
 ## Step 2: Install and Configure Jenkins
 
 ### Objective:
-Install Jenkins on the EC2 instance and make it accessible via a web browser.
+Install Jenkins on the EC2 instance and make it accessible via a web browser...
 
 ### Why?
 Jenkins is a popular automation tool used to build and manage CI/CD pipelines.
