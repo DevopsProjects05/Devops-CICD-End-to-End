@@ -22,7 +22,7 @@ pipeline {
 
         stage('Terraform Init and Apply') {
             steps {
-                withAWS(credentials: 'aws-credentials-id', region: "${AWS_REGION}") { // Use AWS credentials
+                withAWS(credentials: 'aws-credentials', region: "${AWS_REGION}") { // Use AWS credentials
                     script {
                         echo "Initializing and Applying Terraform..."
                         sh '''
