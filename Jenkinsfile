@@ -44,7 +44,7 @@ pipeline {
                             /opt/sonar-scanner/bin/sonar-scanner \
                             -Dsonar.projectKey=Sample-e-commerce-project \
                             -Dsonar.sources=. \
-                            -Dsonar.host.url=http://3.111.53.200:9000/ \
+                            -Dsonar.host.url=http://13.201.73.9:9000/ \
                             -Dsonar.login=sqa_b536b89560529ed8db27f8ccd06a59f3ad844619
                         '''
                     }
