@@ -12,16 +12,18 @@ user_data = <<-EOF
 #!/bin/bash
 #update the system
 sudo yum update -y
-#insttall the docker
+#install the docker
 sudo yum install docker -y
 #start the docker
-sudo service start docker
+systemctl start docker
 #enable the docker
-sudo service enable docker
+systemctl enable docker
 
 #install the git
 sudo yum install git -y
 
-EOF
+#pull docker image
+docker run --name ecommerce -p 3000:3000 nuthan0530/ecommerce-app
 
+EOF
 }
