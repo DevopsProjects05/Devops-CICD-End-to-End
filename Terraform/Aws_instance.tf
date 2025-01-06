@@ -7,29 +7,21 @@ resource "aws_instance" "web" {
   tags = {
     Name = "Terraform-Managed-Instance"
   }
-user_data = <<EOF
 
+user_data = <<-EOF
 #!/bin/bash
-sudo su -
+#update the system
 sudo yum update -y
-sudo yum install -y git
+#insttall the docker
+sudo yum install docker -y
+#start the docker
+sudo service start docker
+#enable the docker
+sudo service enable docker
 
-# Clone the GitHub repository
-git clone https://github.com/DevopsProjects05/Sample-E-Commerce-Project
-cd Sample-E-Commerce-Project/
+#install the git
+sudo yum install git -y
 
-# Install and start NGINX
-sudo yum install nginx -y
-sudo systemctl start nginx
-sudo systemctl enable nginx
-
-# Move the web content to NGINX's web root
-sudo mv * /usr/share/nginx/html/
-
-# Test and reload NGINX configuration
-sudo nginx -t
-sudo systemctl reload nginx
 EOF
 
 }
-
