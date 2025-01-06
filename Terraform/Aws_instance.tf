@@ -7,4 +7,26 @@ resource "aws_instance" "web" {
   tags = {
     Name = "Terraform-Managed-Instance"
   }
+user_data = <<EOF
+
+#!/bin/bash
+# Update the system
+yum update -y
+
+# Install Docker
+yum install docker -y
+
+# Start and enable Docker service
+systemctl start docker
+systemctl enable docker
+
+# Pull the ecommerce application image from Docker Hub
+docker pull nuthan0530/ecommerce-app:latest
+
+# Run the Docker container
+docker run -d --name ecommerimage -p 3000:3000 nuthan0530/ecommerce-app:latest
+
+EOF
+
 }
+
