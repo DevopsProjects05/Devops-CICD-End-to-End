@@ -1,0 +1,6 @@
+# Ignore specific rule IDs
+aws-ec2-add-description-to-security-group-rule
+aws-ec2-add-description-to-security-group
+
+# Ignore all low-severity issues
+LOW
