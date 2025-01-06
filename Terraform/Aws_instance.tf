@@ -10,6 +10,9 @@ resource "aws_instance" "web" {
 user_data = <<EOF
 
 #!/bin/bash
+#get sudo permission
+sudo su -
+
 # Update the system
 yum update -y
 
