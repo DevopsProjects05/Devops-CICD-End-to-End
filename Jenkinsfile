@@ -34,6 +34,9 @@ pipeline {
             steps {
                 dir('Terraform') {
                     // Execute Terraform commands in the 'Terraform' directory
+                    
+                    sh 'tfsec . > tfsec-report.txt '
+                    
                     sh '''
                         terraform init
                         terraform validate
@@ -44,5 +47,7 @@ pipeline {
                 }
             }
         }
+
+        
     }
 }
