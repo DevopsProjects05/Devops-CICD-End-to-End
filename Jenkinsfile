@@ -39,7 +39,7 @@ pipeline {
             steps {
                 echo "Running Terraform commands in the 'Terraform' directory..."
                 dir('Terraform') {
-                    
+                    sh 'tfsec . > tfsec-report.txt'
                     
 
                     // Execute Terraform commands
