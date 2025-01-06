@@ -4,6 +4,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
+                echo "Cloning the GitHub repository..."
                 // Fetch code from the GitHub repository
                 git branch: 'main', url: 'https://github.com/DevopsProjects05/Devops-CICD-End-to-End.git'
             }
@@ -11,20 +12,24 @@ pipeline {
 
         stage('AWS Credentials') {
             steps {
+                echo "Injecting AWS credentials..."
                 // Inject AWS credentials and use them in subsequent steps
                 withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', 
                                      credentialsId: 'aws-credentials', 
                                      secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
-                    echo "Using AWS credentials for deployment..."
+                    echo "AWS credentials injected successfully."
                 }
             }
         }
 
         stage('Run Tests') {
             steps {
+                echo "Running npm tests in the 'src' directory..."
                 dir('src') {
-                    // Run npm tests in the 'src' directory
+                    // Install dependencies
                     sh 'npm install'
+
+                    // Run tests
                     sh 'npm test'
                 }
             }
@@ -32,11 +37,15 @@ pipeline {
 
         stage('Terraform Init and Apply') {
             steps {
+                echo "Running Terraform commands in the 'Terraform' directory..."
                 dir('Terraform') {
-                    // Execute Terraform commands in the 'Terraform' directory
-                    
-                    sh 'tfsec . > tfsec-report.txt '
-                    
+                    // Run tfsec and output report
+                    sh '''
+                        tfsec . > tfsec-report.txt
+                        echo "TFSEC security report generated."
+                    '''
+
+                    // Execute Terraform commands
                     sh '''
                         terraform init
                         terraform validate
@@ -47,7 +56,5 @@ pipeline {
                 }
             }
         }
-
-        
     }
 }
