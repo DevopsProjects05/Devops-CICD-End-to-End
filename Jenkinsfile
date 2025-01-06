@@ -41,7 +41,7 @@ pipeline {
                 dir('Terraform') {
                     // Run tfsec and output report
                     sh '''
-                        tfsec . > tfsec-report.txt
+                        tfsec .
                         echo "TFSEC security report generated."
                     '''
 
