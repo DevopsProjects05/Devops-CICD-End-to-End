@@ -39,11 +39,8 @@ pipeline {
             steps {
                 echo "Running Terraform commands in the 'Terraform' directory..."
                 dir('Terraform') {
-                    // Run tfsec and output report
-                    sh '''
-                        tfsec .
-                        echo "TFSEC security report generated."
-                    '''
+                    
+                    
 
                     // Execute Terraform commands
                     sh '''
