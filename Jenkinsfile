@@ -35,44 +35,7 @@ pipeline {
             }
         }
 
-        stage('Fetch EC2 Instance Public IP') {
-            steps {
-                script {
-                    echo "Fetching EC2 Instance Public IP..."
-                    def publicIp = sh(script: "cd $TERRAFORM_DIR && terraform output -raw public_ip", returnStdout: true).trim()
-                    echo "Public IP: ${publicIp}"
-
-                    echo "Generating Ansible Inventory..."
-                    writeFile file: "$INVENTORY_FILE", text: """
-                    [web]
-                    ${publicIp} ansible_ssh_user=ec2-user ansible_ssh_private_key_file=${PRIVATE_KEY} ansible_ssh_common_args='-o StrictHostKeyChecking=no'
-                    """
-                }
-            }
-        }
-
-        stage('Test Ansible Connectivity') {
-            steps {
-                script {
-                    echo "Testing Ansible Connectivity..."
-                    sh '''
-                    ansible -i $INVENTORY_FILE web -m ping
-                    '''
-                }
-            }
-        }
-
-        stage('Run Ansible Playbook') {
-            steps {
-                script {
-                    echo "Running Ansible Playbook..."
-                    sh '''
-                    ansible-playbook -i $INVENTORY_FILE ./playbook.yml
-                    '''
-                }
-            }
-        }
-    }
+        
 
     post {
         always {
