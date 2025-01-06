@@ -24,7 +24,7 @@ pipeline {
             steps {
                 dir('src') {
                     // Run npm tests in the 'src' directory
-                    sh 'npm insatll'
+                    sh 'npm install'
                     sh 'npm test'
                 }
             }
