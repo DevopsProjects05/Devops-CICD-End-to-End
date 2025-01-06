@@ -1,8 +1,6 @@
 pipeline {
     agent any
 
-   
-
     stages {
         stage('Clone Repository') {
             steps {
@@ -17,7 +15,10 @@ pipeline {
                 withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', 
                                      credentialsId: 'aws-credentials', 
                                      secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
-                    echo "AWS credentials injected successfully."
+                    sh '''
+                        echo "AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID"
+                        echo "AWS_SECRET_ACCESS_KEY is configured."
+                    '''
                 }
             }
         }
@@ -26,8 +27,10 @@ pipeline {
             steps {
                 echo "Running npm tests in the 'src' directory..."
                 dir('src') {
-                    sh 'npm install'
-                    sh 'npm test'
+                    sh '''
+                        npm install
+                        npm test
+                    '''
                 }
             }
         }
@@ -38,7 +41,7 @@ pipeline {
                 dir('src') {
                     withSonarQubeEnv('SonarQube') {
                         sh '''
-                            /bin/sonar-scanner \
+                            /opt/sonar-scanner/bin/sonar-scanner \
                             -Dsonar.projectKey=Sample-e-commerce-project \
                             -Dsonar.sources=. \
                             -Dsonar.host.url=http://3.111.53.200:9000/ \
@@ -53,7 +56,6 @@ pipeline {
             steps {
                 echo "Running Terraform commands in the 'Terraform' directory..."
                 dir('Terraform') {
-                    
                     sh '''
                         terraform init
                         terraform validate
@@ -69,6 +71,12 @@ pipeline {
     post {
         always {
             echo "Pipeline execution completed."
+        }
+        success {
+            echo "Pipeline executed successfully!"
+        }
+        failure {
+            echo "Pipeline failed. Please check the logs for more details."
         }
     }
 }
