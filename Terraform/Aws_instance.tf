@@ -10,25 +10,25 @@ resource "aws_instance" "web" {
 user_data = <<EOF
 
 #!/bin/bash
-#get sudo permission
 sudo su -
+sudo yum update -y
+sudo yum install -y git
 
-# Update the system
-yum update -y
+# Clone the GitHub repository
+git clone https://github.com/DevopsProjects05/Sample-E-Commerce-Project
+cd Sample-E-Commerce-Project/
 
-# Install Docker
-yum install docker -y
+# Install and start NGINX
+sudo yum install nginx -y
+sudo systemctl start nginx
+sudo systemctl enable nginx
 
-# Start and enable Docker service
-systemctl start docker
-systemctl enable docker
+# Move the web content to NGINX's web root
+sudo mv * /usr/share/nginx/html/
 
-# Pull the ecommerce application image from Docker Hub
-docker pull nuthan0530/ecommerce-app:latest
-
-# Run the Docker container
-docker run -d --name ecommerimage -p 3000:3000 nuthan0530/ecommerce-app:latest
-
+# Test and reload NGINX configuration
+sudo nginx -t
+sudo systemctl reload nginx
 EOF
 
 }
