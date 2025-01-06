@@ -1,13 +1,7 @@
 pipeline {
     agent any
 
-    tools {
-        nodejs 'NodeJS' // Ensure Node.js is set up in Jenkins
-    }
-
-    environment {
-        SONAR_SCANNER_HOME = tool(name: 'SonarScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation')
-    }
+   
 
     stages {
         stage('Clone Repository') {
@@ -44,8 +38,8 @@ pipeline {
                 dir('src') {
                     withSonarQubeEnv('SonarQube') {
                         sh '''
-                            ${SONAR_SCANNER_HOME}/bin/sonar-scanner \
-                            -Dsonar.projectKey=Devops-CICD-End-to-End \
+                            /bin/sonar-scanner \
+                            -Dsonar.projectKey=Sample-e-commerce-project \
                             -Dsonar.sources=. \
                             -Dsonar.host.url=http://3.111.53.200:9000/ \
                             -Dsonar.login=sqa_b536b89560529ed8db27f8ccd06a59f3ad844619
