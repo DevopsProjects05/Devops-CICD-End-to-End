@@ -42,6 +42,7 @@ pipeline {
                 sh '''
                     docker build -t sample-ecommerce/ecommerce-nodejs:v1 .
                 '''
+                }
             }
         }
 
