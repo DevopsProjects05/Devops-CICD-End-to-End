@@ -39,7 +39,7 @@ pipeline {
             steps {
                 echo "Building Docker image..."
                 sh '''
-                    docker build -t your-dockerhub-username/ecommerce-nodejs:v1 .
+                    docker build -t sample-ecommerce/ecommerce-nodejs:v1 .
                 '''
             }
         }
@@ -53,7 +53,7 @@ pipeline {
                             /opt/sonar-scanner/bin/sonar-scanner \
                             -Dsonar.projectKey=SampleECommersProject \
                             -Dsonar.sources=. \
-                            -Dsonar.host.url=http://13.203.76.75:9000 \
+                            -Dsonar.host.url=http://13.201.76.136:9000/ \
                             -Dsonar.login=sqa_92f6a751f2edcbad2c2c673aa784eec7d677ad44
                         '''
                     }
