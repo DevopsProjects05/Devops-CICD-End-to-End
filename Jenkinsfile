@@ -42,10 +42,10 @@ pipeline {
                     withSonarQubeEnv('SonarQube') {
                         sh '''
                             /opt/sonar-scanner/bin/sonar-scanner \
-                            -Dsonar.projectKey=Sample-e-commerce-project \
+                            -Dsonar.projectKey=SampleECommersProject \
                             -Dsonar.sources=. \
-                            -Dsonar.host.url=http://13.201.73.9:9000/ \
-                            -Dsonar.login=sqa_b536b89560529ed8db27f8ccd06a59f3ad844619
+                            -Dsonar.host.url=http://13.203.76.75:9000 \
+                            -Dsonar.login=sqa_92f6a751f2edcbad2c2c673aa784eec7d677ad44
                         '''
                     }
                 }
