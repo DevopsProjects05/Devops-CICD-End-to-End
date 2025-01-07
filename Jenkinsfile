@@ -39,9 +39,27 @@ pipeline {
             steps {
                 echo "Building Docker image..."
                 dir('src') {
-                sh '''
-                    docker build -t sample-ecommerce/ecommerce-nodejs:v1 .
-                '''
+                    sh '''
+                        docker build -t sample-ecommerce/ecommerce-nodejs:v1 .
+                    '''
+                }
+            }
+        }
+
+        stage('Push Docker Image') {
+            steps {
+                script {
+                    echo "Pushing Docker image to Docker Hub..."
+                    // Log in to Docker Hub using credentials
+                    withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', 
+                                                      usernameVariable: 'DOCKER_HUB_USERNAME', 
+                                                      passwordVariable: 'DOCKER_HUB_PASSWORD')]) {
+                        sh '''
+                            echo $DOCKER_HUB_PASSWORD | docker login -u $DOCKER_HUB_USERNAME --password-stdin
+                            docker tag sample-ecommerce/ecommerce-nodejs:v1 $DOCKER_HUB_USERNAME/ecommerce-nodejs:v1
+                            docker push $DOCKER_HUB_USERNAME/ecommerce-nodejs:v1
+                        '''
+                    }
                 }
             }
         }
