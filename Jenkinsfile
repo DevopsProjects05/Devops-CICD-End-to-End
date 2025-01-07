@@ -38,6 +38,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 echo "Building Docker image..."
+                dir('src') {
                 sh '''
                     docker build -t sample-ecommerce/ecommerce-nodejs:v1 .
                 '''
