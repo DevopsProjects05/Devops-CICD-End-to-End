@@ -35,6 +35,15 @@ pipeline {
             }
         }
 
+        stage('Build Docker Image') {
+            steps {
+                echo "Building Docker image..."
+                sh '''
+                    docker build -t your-dockerhub-username/ecommerce-nodejs:v1 .
+                '''
+            }
+        }
+
         stage('SonarQube Analysis') {
             steps {
                 echo "Running SonarQube analysis..."

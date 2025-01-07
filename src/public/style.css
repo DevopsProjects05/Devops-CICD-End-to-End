@@ -1,37 +1,58 @@
+/* General Styles */
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f8f9fa;
+  font-family: 'Roboto', sans-serif;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
 }
 
+/* Navbar Styles */
 .navbar {
-    background: linear-gradient(45deg, #007bff, #6610f2);
+  background: linear-gradient(135deg, #71b7e6, #9b59b6);
 }
 
+/* Hero Section Styles */
 .hero {
-    background: url('https://zeve.au/sitecentre/uploads/2022/04/how-to-get-started-with-an-ecommerce-store.jpg') no-repeat center center;
-    background-size: cover;
-    color: white;
-    height: 50vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+  background: url('https://zeve.au/sitecentre/uploads/2022/04/how-to-get-started-with-an-ecommerce-store.jpg') no-repeat center center;
+  background-size: cover;
+  height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .hero h1 {
-    font-size: 3rem;
+  font-size: 3rem;
+  animation: fadeInDown 1s ease-in-out;
 }
 
+@keyframes fadeInDown {
+  from {
+      opacity: 0;
+      transform: translateY(-20px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+/* Highlight Class */
+.highlight {
+  color: skyblue;
+}
+
+/* Content Section Styles */
 .content {
-    padding: 2rem;
-    text-align: center;
+  padding: 2rem 0;
 }
 
+/* Footer Styles */
 .footer {
-    background: #333;
-    color: #fff;
-    padding: 1rem;
-    text-align: center;
+  background: #333;
+  color: white;
+  padding: 1rem 0;
+  text-align: center;
 }
