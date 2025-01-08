@@ -73,7 +73,7 @@ pipeline {
                             /opt/sonar-scanner/bin/sonar-scanner \
                             -Dsonar.projectKey=SampleECommersProject \
                             -Dsonar.sources=. \
-                            -Dsonar.host.url=http://13.201.76.136:9000/ \
+                            -Dsonar.host.url=http://65.0.45.50:9000/ \
                             -Dsonar.login=sqa_92f6a751f2edcbad2c2c673aa784eec7d677ad44
                         '''
                     }
