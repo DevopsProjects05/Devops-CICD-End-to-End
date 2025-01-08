@@ -100,6 +100,12 @@ pipeline {
     post {
         always {
             echo "Pipeline execution completed."
+            // Send Slack notification
+            slackSend(
+                channel: '#pipeline-alerts',
+                color: currentBuild.result == 'SUCCESS' ? 'good' : 'danger',
+                message: "Pipeline '${env.JOB_NAME}' #${env.BUILD_NUMBER} finished with status: ${currentBuild.result}. Check logs for details."
+            )
         }
         success {
             echo "Pipeline executed successfully!"
