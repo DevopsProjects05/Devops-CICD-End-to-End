@@ -10,7 +10,8 @@
     "build": "echo 'No specific build step for Node.js frontend and backend' && exit 0"
   },
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "prom-client": "^14.0.1" //Added Prometheus client library
   },
   "devDependencies": {
     "nodemon": "^2.0.20",
@@ -20,3 +21,4 @@
   "author": "Nuthan Gatla",
   "license": "ISC"
 }
+
