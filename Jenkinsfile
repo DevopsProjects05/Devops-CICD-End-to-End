@@ -58,17 +58,16 @@ pipeline {
 
         stage('Debug AWS Credentials') {
             steps {
-                sh '''
-                    echo "AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID"
-                    echo "AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY"
-                '''
+                withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', 
+                                     credentialsId: 'aws-credentials', 
+                                     secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                    sh '''
+                        echo "AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID"
+                        echo "AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY"
+                    '''
+                }
             }
         }
-
-
-
-
-        
 
         // Build Docker Image
         stage('Build Docker Image') {
@@ -100,20 +99,27 @@ pipeline {
             }
         }
 
+        // Terraform Init and Apply
         stage('Terraform Init and Apply') {
-    steps {
-        echo "Running Terraform commands in the 'terraform' directory..."
-        dir('terraform') {
-            sh '''
-                terraform init
-                terraform validate
-                terraform fmt
-                terraform plan
-                terraform apply -auto-approve
-            '''
+            steps {
+                echo "Running Terraform commands in the 'terraform' directory..."
+                dir('terraform') {
+                    withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', 
+                                         credentialsId: 'aws-credentials', 
+                                         secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                        sh '''
+                            export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+                            export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+                            terraform init
+                            terraform validate
+                            terraform fmt
+                            terraform plan
+                            terraform apply -auto-approve
+                        '''
+                    }
+                }
+            }
         }
-    }
-}
     }
 
     post {
