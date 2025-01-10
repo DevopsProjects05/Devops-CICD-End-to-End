@@ -86,7 +86,7 @@ pipeline {
             steps {
                 script {
                     echo "Pushing Docker image to Docker Hub..."
-                    withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', 
+                    withCredentials([usernamePassword(credentialsId: 'docker-credentials', 
                                                       usernameVariable: 'DOCKER_HUB_USERNAME', 
                                                       passwordVariable: 'DOCKER_HUB_PASSWORD')]) {
                         sh '''
