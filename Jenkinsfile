@@ -56,6 +56,20 @@ pipeline {
             }
         }
 
+        stage('Debug AWS Credentials') {
+            steps {
+                sh '''
+                    echo "AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID"
+                    echo "AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY"
+                '''
+            }
+        }
+
+
+
+
+        
+
         // Build Docker Image
         stage('Build Docker Image') {
             steps {
