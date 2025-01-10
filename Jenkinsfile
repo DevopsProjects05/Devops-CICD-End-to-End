@@ -15,7 +15,7 @@ pipeline {
             steps {
                 echo "Running SonarQube analysis..."
                 dir('src') {
-                    withSonarQubeEnv('SonarQube') {
+                    withSonarQubeEnv('SonarQube server') {
                         sh '''
                             /opt/sonar-scanner/bin/sonar-scanner \
                             -Dsonar.projectKey=SampleECommersProject \
