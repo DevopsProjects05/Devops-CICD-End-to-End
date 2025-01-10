@@ -2,7 +2,6 @@ pipeline {
     agent any
 
     stages {
-        // Clone Repository
         stage('Clone Repository') {
             steps {
                 echo "Cloning the GitHub repository..."
@@ -10,38 +9,6 @@ pipeline {
             }
         }
 
-        // SonarQube Analysis
-        stage('SonarQube Analysis') {
-            steps {
-                echo "Running SonarQube analysis..."
-                dir('src') {
-                    withSonarQubeEnv('SonarQube server') {
-                        sh '''
-                            /opt/sonar-scanner/bin/sonar-scanner \
-                            -Dsonar.projectKey=SampleECommersProject \
-                            -Dsonar.sources=. \
-                            -Dsonar.host.url=http://3.110.207.19:9000/ \
-                            -Dsonar.login=sqa_da9d59a9c09f947b74fd1ccd324124b9de988a7a
-                        '''
-                    }
-                }
-            }
-        }
-
-        // Run Tests
-        stage('Run Tests') {
-            steps {
-                echo "Running npm tests in the 'src' directory..."
-                dir('src') {
-                    sh '''
-                        npm install
-                        npm test
-                    '''
-                }
-            }
-        }
-
-        // AWS Credentials Injection
         stage('AWS Credentials') {
             steps {
                 echo "Injecting AWS credentials..."
@@ -56,20 +23,18 @@ pipeline {
             }
         }
 
-        stage('Debug AWS Credentials') {
+        stage('Run Tests') {
             steps {
-                withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', 
-                                     credentialsId: 'aws-credentials', 
-                                     secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                echo "Running npm tests in the 'src' directory..."
+                dir('src') {
                     sh '''
-                        echo "AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID"
-                        echo "AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY"
+                        npm install
+                        npm test
                     '''
                 }
             }
         }
 
-        // Build Docker Image
         stage('Build Docker Image') {
             steps {
                 echo "Building Docker image..."
@@ -81,11 +46,11 @@ pipeline {
             }
         }
 
-        // Push Docker Image
         stage('Push Docker Image') {
             steps {
                 script {
                     echo "Pushing Docker image to Docker Hub..."
+                    // Log in to Docker Hub using credentials
                     withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', 
                                                       usernameVariable: 'DOCKER_HUB_USERNAME', 
                                                       passwordVariable: 'DOCKER_HUB_PASSWORD')]) {
@@ -99,44 +64,38 @@ pipeline {
             }
         }
 
-        // Terraform Init and Apply
-        stage('Terraform Init and Apply') {
+        stage('SonarQube Analysis') {
             steps {
-                echo "Running Terraform commands in the 'terraform' directory..."
-                dir('terraform') {
-                    withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', 
-                                         credentialsId: 'aws-credentials', 
-                                         secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                echo "Running SonarQube analysis..."
+                dir('src') {
+                    withSonarQubeEnv('SonarQube') {
                         sh '''
-                            export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
-                            export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
-                            terraform init
-                            terraform validate
-                            terraform fmt
-                            terraform plan
-                            terraform apply -auto-approve
+                            /opt/sonar-scanner/bin/sonar-scanner \
+                            -Dsonar.projectKey=Sample-E-Commerce-Project \
+                            -Dsonar.sources=. \
+                            -Dsonar.host.url=http://13.200.235.180:9000/ \
+                            -Dsonar.login=sqa_92f6a751f2edcbad2c2c673aa784eec7d677ad44
                         '''
                     }
                 }
             }
         }
+
+        stage('Terraform Init and Apply') {
+            steps {
+                echo "Running Terraform commands in the 'Terraform' directory..."
+                dir('terraform') {
+                    sh '''
+                        terraform init
+                        terraform validate
+                        terraform fmt
+                        terraform plan
+                        terraform apply -auto-approve
+                    '''
+                }
+            }
+        }
     }
 
-    post {
-        always {
-            echo "Pipeline execution completed."
-            // Send Slack notification
-            slackSend(
-                channel: '#pipeline-alerts',
-                color: currentBuild.result == 'SUCCESS' ? 'good' : 'danger',
-                message: "Pipeline '${env.JOB_NAME}' #${env.BUILD_NUMBER} finished with status: ${currentBuild.result}. Check logs for details."
-            )
-        }
-        success {
-            echo "Pipeline executed successfully!"
-        }
-        failure {
-            echo "Pipeline failed. Please check the logs for more details."
-        }
-    }
+    
 }
