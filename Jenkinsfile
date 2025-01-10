@@ -68,13 +68,14 @@ pipeline {
             steps {
                 echo "Running SonarQube analysis..."
                 dir('src') {
-                    withSonarQubeEnv('SonarQube') {
+                    withSonarQubeEnv('SonarQube server') {
                         sh '''
                             /opt/sonar-scanner/bin/sonar-scanner \
-                            -Dsonar.projectKey=Sample-E-Commerce-Project \
+                            -Dsonar.projectKey=SampleECommersProject \
                             -Dsonar.sources=. \
-                            -Dsonar.host.url=http://13.200.235.180:9000/ \
-                            -Dsonar.login=sqa_92f6a751f2edcbad2c2c673aa784eec7d677ad44
+                            -Dsonar.host.url=http://3.110.207.19:9000/ \
+                            -Dsonar.login=sqa_da9d59a9c09f947b74fd1ccd324124b9de988a7a
+
                         '''
                     }
                 }
