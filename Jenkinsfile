@@ -18,10 +18,10 @@ pipeline {
                     withSonarQubeEnv('SonarQube') {
                         sh '''
                             /opt/sonar-scanner/bin/sonar-scanner \
-                            -Dsonar.projectKey=Sample-E-Commerce-Project \
+                            -Dsonar.projectKey=SampleECommersProject \
                             -Dsonar.sources=. \
-                            -Dsonar.host.url=http://65.0.45.50:9000/ \
-                            -Dsonar.login=sqa_92f6a751f2edcbad2c2c673aa784eec7d677ad44
+                            -Dsonar.host.url=http://13.200.242.10:9000/ \
+                            -Dsonar.login=sqa_da9d59a9c09f947b74fd1ccd324124b9de988a7a
                         '''
                     }
                 }
@@ -46,7 +46,7 @@ pipeline {
             steps {
                 echo "Injecting AWS credentials..."
                 withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', 
-                                     credentialsId: 'aws-credentials', 
+                                     credentialsId: 'aws_credentials', 
                                      secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
                     sh '''
                         echo "AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID"
@@ -62,7 +62,7 @@ pipeline {
                 echo "Building Docker image..."
                 dir('src') {
                     sh '''
-                        docker build -t sample-ecommerce/ecommerce-nodejs:v1 .
+                        docker build -t sample-ecommerce/ecommerce-nodejs:v2 .
                     '''
                 }
             }
