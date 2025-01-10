@@ -62,7 +62,7 @@ pipeline {
                 echo "Building Docker image..."
                 dir('src') {
                     sh '''
-                        docker build -t sample-ecommerce/ecommerce-nodejs:v2 .
+                        docker build -t sample-ecommerce/ecommerce-nodejs:v1 .
                     '''
                 }
             }
