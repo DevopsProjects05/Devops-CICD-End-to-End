@@ -1,16 +1,25 @@
-# CI/CD Pipeline with Node.js, Prometheus, Grafana, and Slack Notifications
+# CI/CD Pipeline with Node.js, Prometheus, Grafana, SonarQube, and Slack Notifications
 
-This README file provides a step-by-step guide to deploy a CI/CD pipeline for a Node.js-based application using Jenkins, Docker, Terraform, Prometheus, Grafana, and Slack notifications. The guide assumes no prior experience and provides detailed instructions for a successful deployment.
+This README file provides a step-by-step guide to deploy a CI/CD pipeline for a Node.js-based application using Jenkins, Docker, Terraform, Prometheus, Grafana, SonarQube, and Slack notifications. The guide assumes no prior experience and provides detailed instructions for a successful deployment.
 
 ---
 
-Project Overview
-Tools and Technologies Used:
-<p align="center"> <img src="https://img.icons8.com/color/48/000000/jenkins.png" alt="Jenkins" title="Jenkins"/> <img src="https://img.icons8.com/color/48/000000/docker.png" alt="Docker" title="Docker"/> <img src="https://img.icons8.com/color/48/000000/terraform.png" alt="Terraform" title="Terraform"/> <img src="https://img.icons8.com/color/48/000000/nodejs.png" alt="Node.js" title="Node.js"/> <img src="https://img.icons8.com/color/48/000000/prometheus-app.png" alt="Prometheus" title="Prometheus"/> <img src="https://img.icons8.com/color/48/000000/grafana.png" alt="Grafana" title="Grafana"/> <img src="https://img.icons8.com/color/48/000000/slack-new.png" alt="Slack" title="Slack"/> <img src="https://img.icons8.com/color/48/000000/sonarqube.png" alt="SonarQube" title="SonarQube"/> </p>
+## Project Overview
+
+### Tools and Technologies Used:
+1. **Jenkins**: For creating and managing the CI/CD pipeline.
+2. **Node.js**: Backend application.
+3. **Docker**: Containerization of the Node.js application.
+4. **Terraform**: Infrastructure as Code (IaC) to provision an EC2 instance.
+5. **Prometheus**: For metrics scraping.
+6. **Grafana**: For visualizing metrics.
+7. **SonarQube**: For static code analysis.
+8. **Slack**: For sending pipeline notifications.
 
 ### Features:
 - Clone the source code from GitHub.
 - Run tests using Jest.
+- Perform static code analysis using SonarQube.
 - Build and push Docker images to Docker Hub.
 - Deploy infrastructure using Terraform.
 - Monitor application metrics with Prometheus and Grafana.
@@ -27,7 +36,8 @@ Tools and Technologies Used:
 4. [Node.js and npm](https://nodejs.org/)
 5. [Prometheus](https://prometheus.io/)
 6. [Grafana](https://grafana.com/)
-7. Slack workspace (optional, for notifications)
+7. [SonarQube](https://www.sonarqube.org/)
+8. Slack workspace (optional, for notifications)
 
 ### Setup Required:
 1. **GitHub Repository:**
@@ -37,12 +47,13 @@ Tools and Technologies Used:
    - Docker Pipeline
    - Terraform
    - Slack Notifications
-   - SonarQube Scanner (optional)
+   - SonarQube Scanner
 
 3. **Credentials:**
    - Docker Hub credentials
    - AWS credentials
    - Slack webhook URL
+   - SonarQube token
 
 ---
 
@@ -69,14 +80,31 @@ Tools and Technologies Used:
    npm test
    ```
 
-### Step 4: Build Docker Image
+### Step 4: Perform SonarQube Analysis
+1. Install and configure SonarQube on your machine or server.
+2. Generate a SonarQube authentication token.
+3. Configure the SonarQube plugin in Jenkins.
+4. Add the following stage in your Jenkins pipeline:
+   ```groovy
+   withSonarQubeEnv('SonarQube') {
+       sh '''
+           /opt/sonar-scanner/bin/sonar-scanner \
+           -Dsonar.projectKey=SampleECommerceProject \
+           -Dsonar.sources=. \
+           -Dsonar.host.url=http://<SonarQube-IP>:9000/ \
+           -Dsonar.login=<SonarQube-Token>
+       '''
+   }
+   ```
+
+### Step 5: Build Docker Image
 1. Create a `Dockerfile` in the `src` directory of your project.
 2. Use the following command to build the Docker image:
    ```bash
    docker build -t <your-dockerhub-username>/ecommerce-nodejs:v1 .
    ```
 
-### Step 5: Push Docker Image to Docker Hub
+### Step 6: Push Docker Image to Docker Hub
 1. Log in to Docker Hub:
    ```bash
    docker login -u <your-dockerhub-username> -p <your-password>
@@ -86,7 +114,7 @@ Tools and Technologies Used:
    docker push <your-dockerhub-username>/ecommerce-nodejs:v1
    ```
 
-### Step 6: Deploy Infrastructure with Terraform
+### Step 7: Deploy Infrastructure with Terraform
 1. Navigate to the `Terraform` directory.
 2. Run the following commands:
    ```bash
@@ -96,7 +124,7 @@ Tools and Technologies Used:
    ```
 3. Terraform will create an EC2 instance with your Node.js application running on port 3000.
 
-### Step 7: Set Up Prometheus
+### Step 8: Set Up Prometheus
 1. Download Prometheus and extract it:
    ```bash
    wget https://github.com/prometheus/prometheus/releases/download/v2.x.x/prometheus-2.x.x.linux-amd64.tar.gz
@@ -114,7 +142,7 @@ Tools and Technologies Used:
    ./prometheus --config.file=prometheus.yml
    ```
 
-### Step 8: Set Up Grafana
+### Step 9: Set Up Grafana
 1. Download and start Grafana.
 2. Add Prometheus as a data source in Grafana:
    - URL: `http://localhost:9090`
@@ -123,7 +151,7 @@ Tools and Technologies Used:
    http_request_duration_seconds_count
    ```
 
-### Step 9: Configure Slack Notifications
+### Step 10: Configure Slack Notifications
 1. Create a Slack app and generate a webhook URL.
 2. Add the webhook URL to the Jenkins Slack plugin.
 3. Add a post-build action to send notifications:
@@ -135,6 +163,7 @@ Tools and Technologies Used:
 
 ## Validation
 - **Jenkins Pipeline**: Check the stages and logs for success.
+- **SonarQube**: Verify code quality and resolve issues.
 - **Prometheus**: Verify metrics at `/metrics` endpoint.
 - **Grafana**: Visualize metrics in the dashboard.
 - **Slack**: Check for notifications in the configured channel.
@@ -145,10 +174,11 @@ Tools and Technologies Used:
 1. **Port Conflict:** Ensure no other service is running on port 3000.
 2. **Terraform Issues:** Check AWS credentials and ensure the IAM role has proper permissions.
 3. **Slack Notifications Fail:** Verify the webhook URL and Slack workspace settings.
-4. **Prometheus Targets Down:** Ensure the Node.js application is running and the endpoint is reachable.
+4. **SonarQube Errors:** Ensure the scanner is installed and the token is valid.
+5. **Prometheus Targets Down:** Ensure the Node.js application is running and the endpoint is reachable.
 
 ---
 
 ## Conclusion
-By following this README, you can set up a fully functional CI/CD pipeline for a Node.js application, complete with monitoring and notifications. For any issues, refer to the troubleshooting section.
+By following this README, you can set up a fully functional CI/CD pipeline for a Node.js application, complete with monitoring, code quality analysis, and notifications. For any issues, refer to the troubleshooting section.
 
