@@ -91,6 +91,16 @@ pipeline {
             steps {
                 echo "Running Terraform commands in the 'terraform' directory..."
                 dir('terraform') {
+                     withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', 
+                                     credentialsId: 'aws-credentials', 
+                                     secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                    sh '''
+                        echo "AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID"
+                        echo "AWS_SECRET_ACCESS_KEY is configured."
+                    '''
+                }
+
+                    
                     sh '''
                         terraform init
                         terraform validate
