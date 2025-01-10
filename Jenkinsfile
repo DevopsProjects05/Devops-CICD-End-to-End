@@ -46,7 +46,7 @@ pipeline {
             steps {
                 echo "Injecting AWS credentials..."
                 withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', 
-                                     credentialsId: 'aws_credentials', 
+                                     credentialsId: 'aws-credentials', 
                                      secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
                     sh '''
                         echo "AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID"
