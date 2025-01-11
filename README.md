@@ -6,6 +6,32 @@ To provide a deeper understanding of the deployment workflow, this project demon
 
 ---
 
+# Table of Contents
+
+1. [Project Overview](#project-overview)
+2. [Prerequisites](#prerequisites)
+3. [Architecture](#architecture)
+4. [Manual Deployment Steps](#manual-deployment-steps)
+   - [Step 1: Create the EC2 Instance](#step-1-create-the-ec2-instance)
+   - [Step 2: Install Required Tools](#step-2-install-required-tools)
+   - [Step 3: Clone the Project Repository](#step-3-clone-the-project-repository)
+   - [Step 4: Install Project Dependencies](#step-4-install-project-dependencies)
+   - [Step 5: Prepare Docker Environment](#step-5-prepare-docker-environment)
+   - [Step 6: Deploy Infrastructure with Terraform](#step-6-deploy-infrastructure-with-terraform)
+   - [Step 7: Install Jenkins](#step-7-install-jenkins)
+   - [Step 8: SonarQube Setup](#step-8-sonarqube-setup)
+   - [Step 9: Monitoring with Prometheus and Grafana](#step-9-monitoring-with-prometheus-and-grafana)
+5. [Automating with Jenkins Pipeline](#automating-with-jenkins-pipeline)
+   - [Creating Jenkins Pipeline](#creating-jenkins-pipeline)
+   - [Integrating Slack Notifications](#integrating-slack-notifications)
+6. [Validation and Testing](#validation-and-testing)
+7. [Future Enhancements](#future-enhancements)
+8. [Challenges and Learnings](#challenges-and-learnings)
+
+
+
+
+
 ### Prerequisites
 
 - **AWS Account:** Required for provisioning EC2 instances and other resources.
