@@ -15,7 +15,7 @@ pipeline {
             steps {
                 echo "Running SonarQube analysis..."
                 dir('src') {
-                    withSonarQubeEnv('SonarQube') {
+                    withSonarQubeEnv('SonarQube') { 
                         sh '''
                             /opt/sonar-scanner/bin/sonar-scanner \
                             -Dsonar.projectKey=SampleECommersProject \
@@ -51,19 +51,6 @@ pipeline {
                     sh '''
                         echo "AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID"
                         echo "AWS_SECRET_ACCESS_KEY is configured."
-                    '''
-                }
-            }
-        }
-
-        stage('Debug AWS Credentials') {
-            steps {
-                withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', 
-                                     credentialsId: 'aws-credentials', 
-                                     secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
-                    sh '''
-                        echo "AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID"
-                        echo "AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY"
                     '''
                 }
             }
