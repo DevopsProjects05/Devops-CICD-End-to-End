@@ -211,8 +211,10 @@ You can proceed directly to the next step in this README file.dockerfile
 4. Verify on Docker Hub.
 
 After running the steps, the output will appear as follows:
+
 ---
 ![](/images/3.Docker-image.jpg)
+
 ---
 
 ## Step 7: Deploy Infrastructure with Terraform
@@ -314,7 +316,11 @@ cat /var/lib/jenkins/secrets/initialAdminPassword
 ### Create Jenkins User
 After entering the initial admin password, you will be redirected to a page to set up a Jenkins user account. Fill in the required details as shown below:
 
+---
+
 ![](/images/7.create-user.jpg)
+
+---
 
 Provide the necessary details to create your Jenkins account, then  select **Install the suggested plugins** and login to your account.
 
@@ -334,9 +340,12 @@ Provide the necessary details to create your Jenkins account, then  select **Ins
   - Slack Notification
   - AWS Credentials
 
-##### Follow the below screenshot
+#### Follow the below screenshot
 
+---
 ![](/images/8.jenkins-plugins.jpg)
+
+---
 
 After installing all the plugins, restart Jenkins:
 ```bash
@@ -363,10 +372,6 @@ sudo systemctl restart jenkins
    - **ID**: Use an identifier like such as. `aws-credentials`.
 5. Save the credentials.
 
-
-
-
----
 ### SonarQube Setup (Manual Execution)
 #### Run SonarQube Container
 1. Create and run a SonarQube container:
@@ -441,8 +446,11 @@ sudo systemctl restart jenkins
    ```
   Add the path as shown below:
 
+  ---
+
 ![](/images/11.sonarpath.jpg)
 
+---
 
    ```bash
    source ~/.bashrc
@@ -516,7 +524,7 @@ sudo systemctl restart jenkins
 
 ---
 
-#### Create a Jenkins Pipeline for Automation
+### Create a Jenkins Pipeline for Automation
 1. In the Jenkins dashboard, click on **+ New Item** or **New Job**.
 2. Provide a name (e.g., Jenkins Pipeline).
 3. Select **Pipeline** and click **OK** to proceed.
@@ -534,6 +542,13 @@ sudo systemctl restart jenkins
 2. Ensure you are providing the correct name for Docker credentials: `dockerhub-credentials`.
 3. For Slack notification setup: follow the video [here](https://www.youtube.com/watch?v=9ZUy3oHNgh8&t=789s).
 
+##### This page will be displayed after successfully creating the Slack notification
+
+---
+![](/images/slack.jpg)
+
+---
+
 ## Step 9: Monitoring with Prometheus and Grafana
 
 ### Add Prometheus to Node.js Application
@@ -550,7 +565,7 @@ sudo systemctl restart jenkins
    ```
 2. Access Prometheus metrics at: `http://<public-ip>:3000/metrics` to ensure it is working as expected.
 
-#### You will see the metrics once you access the url:
+### You will see the metrics once you access the URL:
 
 ---
 
@@ -559,7 +574,7 @@ sudo systemctl restart jenkins
 ---
 
 ### Open a Separate Terminal for Prometheus Setup
-1. Right-click on the tab of your terminal session.
+1. **Right-click** on the tab of your terminal session.
 2. From the context menu, select the option **'Duplicate Session'**.
 3. This will open a new tab with a duplicate of your current terminal session, which you can use to continue the setup process.
 4. After entering into the duplicate terminal, get sudo access and navigate to:
@@ -624,6 +639,15 @@ Below is the result you can expect:
 
 ---
 
+### Open a Separate Terminal for Grafana Setup
+1. **Right-click** on the tab of your terminal session.
+2. From the context menu, select the option **'Duplicate Session'**.
+3. This will open a new tab with a duplicate of your current terminal session, which you can use to continue the setup process.
+4. After entering into the duplicate terminal, get sudo access and navigate to:
+   ```bash
+   cd Devops-CICD-End-to-End/src/
+   ```
+
 ### Install and Configure Grafana
 1. Download and run Grafana:
    ```bash
@@ -668,10 +692,11 @@ vi defaults.ini
 ```bash
 http_port = 3001
 ```
-
+---
 
 ![](/images/port-change.jpg)
 
+--- 
 
 #### Restart Grafana
 Now, navigate back to the Grafana execution folder:
@@ -686,7 +711,7 @@ Run Grafana again:
 
    Access Grafana: `http://<server-ip>:3001`.
 
-  #### You will see the below screen:
+### You will see the below screen:
 
    ---
 ![](/images/grafana-1.jpg)
@@ -751,13 +776,15 @@ click on **import.**
 ---
 ![](/images/grafana-nodejs.jpg)
 
+---
+
 ## Final Validation
 1. Access all services (Jenkins, Node.js, Prometheus, Grafana) and verify the setup.
 2. Confirm the CI/CD pipeline is functional.
 
----
 
-**Congratulations! You have successfully set up a CI/CD pipeline for a Node.js application.**
+
+## Congratulations! You have successfully set up a CI/CD pipeline for a Node.js application.
 
 
 #### Future Scope
