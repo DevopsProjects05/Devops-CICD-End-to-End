@@ -2,6 +2,8 @@
 
 This project demonstrates a comprehensive CI/CD pipeline built to automate the deployment of a **Node.js application.** The pipeline integrates modern DevOps tools such as **Jenkins, Docker, Terraform, SonarQube, Prometheus, Grafana, and Slack** to deliver a seamless deployment experience. The project is structured to ensure scalability, monitoring, and maintainability for **real-world** applications.
 
+**"This project demonstrates both manual and automated approaches to deploying a Node.js application. Initially, the deployment was performed manually to ensure all components were configured correctly. Later, the process was automated using a Jenkinsfile for faster and more reliable deployments."**
+
 ---
 
 ### Prerequisites
@@ -26,6 +28,9 @@ This project demonstrates a comprehensive CI/CD pipeline built to automate the d
 ---
 ### Architecture
 ---
+
+
+
 ## Step 1: Create the EC2 Instance
 
 ### Objective
@@ -548,10 +553,16 @@ sudo systemctl restart jenkins
 ![](/images/slack.jpg)
 
 ---
+#### Jenkinsfile Summary:
 
-Summary:
+This Jenkinsfile automates the CI/CD pipeline for an **e-commerce project.** It begins by **cloning** the code from a **GitHub repository,** performs a **SonarQube analysis** to ensure code quality, and **runs tests** to validate application stability. Following this, it builds and pushes a **Docker image** to Docker Hub and provisions **AWS infrastructure** using **Terraform.** Lastly, the pipeline sends **Slack notifications** to report the build status, enabling a seamless and automated deployment workflow.
 
-once you click on **Build** the pipeline start by triggering github repository then 
+#### You will see the stage view of your pipeline:
+
+---
+![](/images/jenkins-pipeline.jpg)
+
+---
 
 ## Step 9: Monitoring with Prometheus and Grafana
 
@@ -803,6 +814,9 @@ click on **import.**
 
 #### Challenges and Learnings
 
+- Transitioning from manual to automated deployment highlighted the importance of a robust CI/CD pipeline in DevOps workflows.
+- The manual process helped understand the inner workings of each tool, while automation streamlined the deployment, making it faster and less error-prone.
+
 ##### Challenges:
 
 - Integrating SonarQube with Jenkins for real-time code analysis.
@@ -820,5 +834,9 @@ click on **import.**
 - Streamlined Slack notifications for efficient team communication.
 
 ---
+
+
+
+
 
 
