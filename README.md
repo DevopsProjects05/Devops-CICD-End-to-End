@@ -28,7 +28,7 @@ To provide a deeper understanding of the deployment workflow, this project demon
 7. [Future Enhancements](#future-enhancements)
 8. [Challenges and Learnings](#challenges-and-learnings)
 
-
+---
 
 
 
@@ -55,6 +55,10 @@ To provide a deeper understanding of the deployment workflow, this project demon
 ### Architecture
 ---
 
+
+![](/images/CI-CD-%20Architecture.jpg)
+
+---
 
 
 ## Step 1: Create the EC2 Instance
