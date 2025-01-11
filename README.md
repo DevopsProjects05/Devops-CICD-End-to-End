@@ -549,6 +549,10 @@ sudo systemctl restart jenkins
 
 ---
 
+Summary:
+
+once you click on **Build** the pipeline start by triggering github repository then 
+
 ## Step 9: Monitoring with Prometheus and Grafana
 
 ### Add Prometheus to Node.js Application

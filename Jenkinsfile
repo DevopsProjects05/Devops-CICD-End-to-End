@@ -20,8 +20,8 @@ pipeline {
                             /opt/sonar-scanner/bin/sonar-scanner \
                             -Dsonar.projectKey=SampleECommersProject \
                             -Dsonar.sources=. \
-                            -Dsonar.host.url=http://43.204.230.200:9000/ \
-                            -Dsonar.login=sqa_73312e1aa086fede792df907dc29e258ddb00f57
+                            -Dsonar.host.url=http://65.0.139.1:9000/ \
+                            -Dsonar.login=sqa_da9d59a9c09f947b74fd1ccd324124b9de988a7a
                         '''
                     }
                 }
@@ -73,7 +73,7 @@ pipeline {
             steps {
                 script {
                     echo "Pushing Docker image to Docker Hub..."
-                    withCredentials([usernamePassword(credentialsId: 'docker-credentials', 
+                    withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', 
                                                       usernameVariable: 'DOCKER_HUB_USERNAME', 
                                                       passwordVariable: 'DOCKER_HUB_PASSWORD')]) {
                         sh '''
