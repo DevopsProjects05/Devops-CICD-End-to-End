@@ -2,7 +2,7 @@
 
 **This project showcases a comprehensive CI/CD pipeline designed to automate the deployment of a Node.js application. It integrates modern DevOps tools such as Jenkins, Docker, Terraform, SonarQube, Prometheus, Grafana, and Slack to ensure scalability, monitoring, and maintainability for real-world applications.**
 
-To provide a deeper understanding of the deployment workflow, this project demonstrates both **manual and automated** approaches. Initially, the deployment was performed manually to verify and ensure that all components were configured correctly and working as expected. Once validated, the process was automated using a Jenkinsfile, enabling faster, repeatable, and more reliable deployments.
+To provide a deeper understanding of the deployment workflow, this project demonstrates both **manual and automated** approaches. Initially, the deployment was performed manually to verify and ensure that all components were configured correctly and working as expected. Once validated, the process was automated using a Jenkinsfile, enabling faster, repeatable, and more reliable deployments...
 
 ---
 
