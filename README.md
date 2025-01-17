@@ -237,7 +237,7 @@ You can proceed directly to the next step in this README file.dockerfile
    ```
 2. Tag the image:
    ```bash
-   docker tag ecommerce-nodejs:v1 <your-dockerhub-username>/ecommerce-nodejs:v1
+   docker tag <Image-name> <your-dockerhub-username>/ecommerce-nodejs:v1          # Replace with your image name
    ```
 3. Push the image:
    ```bash
