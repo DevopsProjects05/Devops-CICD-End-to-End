@@ -723,10 +723,7 @@ find / -name defaults.ini 2>/dev/null
 
 2.Navigate to the `conf` directory:
 ```bash
-cd ..
-```
-```bash
-cd conf
+cd ../conf
 ```
 
 3.Edit the `defaults.ini` file:
