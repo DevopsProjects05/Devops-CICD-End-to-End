@@ -22,13 +22,14 @@ To provide a deeper understanding of the deployment workflow, this project demon
    - [Step 6: Deploy Infrastructure with Terraform](#step-6-deploy-infrastructure-with-terraform)  
    - [Step 7: Install Jenkins](#step-7-install-jenkins)  
    - [Step 8: SonarQube Setup](#step-8-sonarqube-setup)  
-   - [Step 9: Monitoring with Prometheus and Grafana](#step-9-monitoring-with-prometheus-and-grafana)  
+     
 5. [Automating with Jenkins Pipeline](#automating-with-jenkins-pipeline)  
    - [Creating Jenkins Pipeline](#creating-jenkins-pipeline)  
-   - [Integrating Slack Notifications](#integrating-slack-notifications)  
-6. [Validation and Testing](#validation-and-testing)  
-7. [Future Enhancements](#future-enhancements)  
-8. [Challenges and Learnings](#challenges-and-learnings)
+   - [Integrating Slack Notifications](#integrating-slack-notifications) 
+6.  [Monitoring with Prometheus and Grafana](#monitoring-with-prometheus-and-grafana) 
+7. [Validation and Testing](#validation-and-testing)  
+8. [Future Enhancements](#future-enhancements)  
+9. [Challenges and Learnings](#challenges-and-learnings)
 
 
 ---
@@ -411,7 +412,7 @@ sudo systemctl restart jenkins
    - **ID**: Use an identifier like such as. `aws-credentials`.
 5. Save the credentials.
 
-### Step 8: SonarQube Setup (Manual Execution)
+### Step 8: SonarQube Setup
 #### Run SonarQube Container
 1. Create and run a SonarQube container:
    ```bash
