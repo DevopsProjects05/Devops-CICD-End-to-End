@@ -605,7 +605,7 @@ This Jenkinsfile automates the CI/CD pipeline for an **e-commerce project.** It 
 
 ---
 
-## Step 9: Monitoring with Prometheus and Grafana
+## Monitoring with Prometheus and Grafana
 
 ### Add Prometheus to Node.js Application
 1. Install Prometheus client:
