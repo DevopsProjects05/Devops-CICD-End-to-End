@@ -159,7 +159,7 @@ npm -v
    ```
 5. Access the application at: `http://<public-ip>:3000`.
 
-## Below is the result you can expect:
+### Below is the result you can expect:
 
 ---
 
@@ -208,7 +208,7 @@ You can proceed directly to the next step (Build the Docker image)
    ```bash
    docker images
    ```
-## Your output will resemble the example below:
+### Your output will resemble the example below:
 ---
 
    ![](/images/2.Docker-image-build.jpg)
@@ -226,7 +226,7 @@ You can proceed directly to the next step (Build the Docker image)
    ```
 3. Access the application: `http://<Your-EC2-Public-IP>:3000`.
 
-## The following results confirm a successful execution:
+### The following results confirm a successful execution:
 
 ---
 
@@ -251,7 +251,7 @@ You can proceed directly to the next step (Build the Docker image)
    ```
 4. Verify on Docker Hub.
 
-After running the steps, the output will appear as follows:
+### After running the steps, the output will appear as follows:
 
 ---
 ![](/images/3.Docker-image.jpg)
@@ -309,7 +309,7 @@ After running the steps, the output will appear as follows:
    ```
 4. Access the application: `http://<EC2-Public-IP>:3000`.
 
-## Below is the output you should see after following the steps:
+### Below is the output you should see after following the steps:
 
 ---
 
@@ -384,7 +384,7 @@ Provide the necessary details to create your Jenkins account, then  select **Ins
   - Slack Notification
   - AWS Credentials
 
-#### Follow the below screenshot
+### Follow the below screenshot
 
 ---
 ![](/images/8.jenkins-plugins.jpg)
@@ -535,7 +535,7 @@ sudo systemctl restart jenkins
    /opt/sonar-scanner/bin/sonar-scanner
    ```
 
-  ##### You will see below result after running sonar scanner:
+  ### You will see below result after running sonar scanner:
 
   ---
 
