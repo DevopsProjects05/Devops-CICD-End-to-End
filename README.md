@@ -190,7 +190,7 @@ npm -v
    ```
 
 ### Build the Docker Image (Skip this step, as the Dockerfile is already stored in the `src` directory)
-You can proceed directly to the next step in this README file.dockerfile
+You can proceed directly to the next step (Build the Docker image)
    ```dockerfile
    FROM node:16
    WORKDIR /app
@@ -200,11 +200,11 @@ You can proceed directly to the next step in this README file.dockerfile
    EXPOSE 3000
    CMD ["node", "server.js"]
    ```
-2. Build the Docker image:
+1. Build the Docker image:
    ```bash
    docker build -t ecommerce-nodejs:v1 .    #If you want to change image name you can 
    ```
-3. Verify the image:
+2. Verify the image:
    ```bash
    docker images
    ```
