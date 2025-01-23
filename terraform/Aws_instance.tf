@@ -31,3 +31,5 @@ docker run --name ecommerce -p 3000:3000 nuthan0530/ecommerce-nodejs:v1
 
 EOF
 }
+
+
