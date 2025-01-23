@@ -164,6 +164,7 @@ npm -v
 ---
 
 ![](/images/1.NodeJs.jpg)
+
 ---
 
 ## Step 5: Prepare Docker Environment
@@ -313,6 +314,7 @@ After running the steps, the output will appear as follows:
 ---
 
 ![](/images/1.NodeJs.jpg)
+
 ---
 
 ### Step 7: Install Jenkins
@@ -345,6 +347,8 @@ Once you access Jenkins at `http://<Jenkins-Instance-IP>:8080`, you will see the
 
 ---
 ![](/images/6.jenkins.jpg)
+
+---
 
 ### Retrieve the Initial Admin Password
 Copy the file path shown on the page and run the following command in the terminal:
@@ -594,11 +598,11 @@ sudo systemctl restart jenkins
 ![](/images/slack.jpg)
 
 ---
-#### Jenkinsfile Summary:
+## Jenkinsfile Summary:
 
 This Jenkinsfile automates the CI/CD pipeline for an **e-commerce project.** It begins by **cloning** the code from a **GitHub repository,** performs a **SonarQube analysis** to ensure code quality, and **runs tests** to validate application stability. Following this, it builds and pushes a **Docker image** to Docker Hub and provisions **AWS infrastructure** using **Terraform.** Lastly, the pipeline sends **Slack notifications** to report the build status, enabling a seamless and automated deployment workflow.
 
-#### You will see the stage view of your pipeline:
+### You will see the stage view of your pipeline:
 
 ---
 ![](/images/jenkins-pipeline.jpg)
