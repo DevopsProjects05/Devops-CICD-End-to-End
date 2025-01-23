@@ -232,7 +232,7 @@ You can proceed directly to the next step in this README file.dockerfile
 
 ---
 
-## Step 6: Deploy Infrastructure with Terraform
+## Push Docker Image to Docker Hub
 
 ### Actions
 1. Log in to Docker Hub:
@@ -256,7 +256,7 @@ After running the steps, the output will appear as follows:
 
 ---
 
-## Step 7: Deploy Infrastructure with Terraform
+## Step 6: Deploy Infrastructure with Terraform
 
 ### Install Terraform
 1. Download Terraform:
@@ -314,7 +314,7 @@ After running the steps, the output will appear as follows:
 ![](/images/1.NodeJs.jpg)
 ---
 
-### Step 8: Install Jenkins
+### Step 7: Install Jenkins
 1. Add Jenkins repository:
    ```bash
    sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat/jenkins.repo
@@ -411,7 +411,7 @@ sudo systemctl restart jenkins
    - **ID**: Use an identifier like such as. `aws-credentials`.
 5. Save the credentials.
 
-### SonarQube Setup (Manual Execution)
+### Step 8: SonarQube Setup (Manual Execution)
 #### Run SonarQube Container
 1. Create and run a SonarQube container:
    ```bash
@@ -563,7 +563,10 @@ sudo systemctl restart jenkins
 
 ---
 
-### Create a Jenkins Pipeline for Automation
+### Automating with Jenkins Pipeline
+
+### Creating Jenkins Pipeline
+
 1. In the Jenkins dashboard, click on **+ New Item** or **New Job**.
 2. Provide a name (e.g., Jenkins Pipeline).
 3. Select **Pipeline** and click **OK** to proceed.
@@ -579,7 +582,10 @@ sudo systemctl restart jenkins
 ### Before Building Pipeline Ensure:
 1. Ensure you are adding the correct SonarQube name, project key, and token.
 2. Ensure you are providing the correct name for Docker credentials: `dockerhub-credentials`.
-3. For Slack notification setup: follow the video [here](https://www.youtube.com/watch?v=9ZUy3oHNgh8&t=789s).
+
+## Integrating Slack Notifications
+
+ For Slack notification setup: follow the video [here](https://www.youtube.com/watch?v=9ZUy3oHNgh8&t=789s).
 
 ##### This page will be displayed after successfully creating the Slack notification
 
@@ -833,7 +839,7 @@ click on **import.**
 ## Congratulations! You have successfully set up a CI/CD pipeline for a Node.js application.
 
 
-#### Future Scope
+#### Future Enhancements
 
 - Add Kubernetes for container orchestration.
 
