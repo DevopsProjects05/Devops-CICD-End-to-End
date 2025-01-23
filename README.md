@@ -560,7 +560,7 @@ sudo systemctl restart jenkins
 3. Locate the project (e.g., `Sample E-Commerce Project`).
 4. View analysis results, including security issues, reliability, maintainability, and code coverage.
 
-#### The following output will be visible upon successful execution:
+### The following output will be visible upon successful execution:
 
 ---
 
@@ -691,7 +691,7 @@ To start the Prometheus server, use the following command:
 - Choose Targets from the dropdown.
 
 
-Below is the result you can expect:
+### Below is the result you can expect:
 
 ---
 
@@ -783,7 +783,7 @@ Password: admin
 Change the password upon first login.
 
 
-#### Once you login you will see Grafana Dashboard as shown below:
+### Once you login you will see Grafana Dashboard as shown below:
 
 ![](/images/grafana-dashboard.jpg)
 
@@ -792,7 +792,7 @@ Add Prometheus as a data source.
  -  In Grafana, go to Configuration > **Data Sources**
  -  Click **Add data source.**
 
-  #### The following page will appear:
+### The following page will appear:
 
    ---
    ![](/images/grafana-datasource.jpg)
@@ -828,7 +828,7 @@ Node js Dashboard: **11159** andclick on load and select **`Prometheus`** in pro
 
 click on **import.**
 
-#### Here is the NodeJS Application Dashboard result after the process completes
+### Here is the NodeJS Application Dashboard result after the process completes
 
 ---
 ![](/images/grafana-nodejs.jpg)
