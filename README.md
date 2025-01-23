@@ -1,5 +1,7 @@
 ## Automated CI/CD Pipeline for Node.js Applications
 
+### Project Overview
+
 **This project showcases a comprehensive CI/CD pipeline designed to automate the deployment of a Node.js application. It integrates modern DevOps tools such as Jenkins, Docker, Terraform, SonarQube, Prometheus, Grafana, and Slack to ensure scalability, monitoring, and maintainability for real-world applications.**
 
 To provide a deeper understanding of the deployment workflow, this project demonstrates both **manual and automated** approaches. Initially, the deployment was performed manually to verify and ensure that all components were configured correctly and working as expected. Once validated, the process was automated using a Jenkinsfile, enabling faster, repeatable, and more reliable deployments...
@@ -61,6 +63,7 @@ To provide a deeper understanding of the deployment workflow, this project demon
 
 ---
 
+## Manual Deployment Steps:
 
 ## Step 1: Create the EC2 Instance
 
@@ -229,7 +232,7 @@ You can proceed directly to the next step in this README file.dockerfile
 
 ---
 
-## Step 6: Push Docker Image to Docker Hub
+## Step 6: Deploy Infrastructure with Terraform
 
 ### Actions
 1. Log in to Docker Hub:
