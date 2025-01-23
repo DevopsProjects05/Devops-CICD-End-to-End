@@ -28,6 +28,7 @@ To provide a deeper understanding of the deployment workflow, this project demon
 7. [Future Enhancements](#future-enhancements)  
 8. [Challenges and Learnings](#challenges-and-learnings)
 
+
 ---
 
 
@@ -820,7 +821,7 @@ click on **import.**
 
 ---
 
-## Final Validation
+## Validation and Testing
 1. Access all services (Jenkins, Node.js, Prometheus, Grafana) and verify the setup.
 2. Confirm the CI/CD pipeline is functional.
 
