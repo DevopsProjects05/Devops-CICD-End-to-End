@@ -40,7 +40,6 @@ pipeline {
                 }
             }
         }
-
         // AWS Credentials Injection
         stage('AWS Credentials') {
             steps {
