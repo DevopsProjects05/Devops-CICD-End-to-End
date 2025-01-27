@@ -503,7 +503,7 @@ sudo systemctl restart jenkins
    ```bash
    sonar-scanner --version
    ```
-
+Ensure “SonarQube Scanner for Jenkins” plugin is installed.
 #### Analyze Code with Sonar Scanner
 1. Navigate to the `src` directory.
    ```bash
@@ -772,6 +772,7 @@ Run Grafana again:
 
    ---
 ![](/images/grafana-1.jpg)
+
    ---
 
 Login using default credentials:
@@ -784,9 +785,11 @@ Change the password upon first login.
 
 
 ### Once you login you will see Grafana Dashboard as shown below:
+---
 
 ![](/images/grafana-dashboard.jpg)
 
+---
 #### Configure Prometheus as a Data Source
 Add Prometheus as a data source.
  -  In Grafana, go to Configuration > **Data Sources**
@@ -817,7 +820,7 @@ Go to Dashboards > toggle menu > dashboards > new> Import in Grafana.
 
 Enter a **Dashboard ID:**
 
-Node js Dashboard: **11159** andclick on load and select **`Prometheus`** in prometheus
+Node js Dashboard: **11159** and click on load and select **`Prometheus`** in prometheus
 
 #### The interface will appear as follows:
 
